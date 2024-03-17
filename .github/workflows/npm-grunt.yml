@@ -21,7 +21,15 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libappindicator3-dev libindicator3-dev
+        wget https://golang.org/dl/go1.15.7.linux-amd64.tar.gz
+        sudo tar -C /usr/local -xzf go1.15.7.linux-amd64.tar.gz
+        export PATH=$PATH:/usr/local/go/bin
+        go get github.com/ssbc/systrayhelper
+        sudo mv $HOME/go/bin/systrayhelper /usr/local/bin
     - name: Build
       run: |
         npm install
