@@ -33,10 +33,6 @@ jobs:
         npm install -g npm-check-updates
         ncu -u
         npm install
-    - name: Install Grunt CLI
-      run: |
-        cd src
-        npm install grunt-cli --save-dev
     - name: Build
       run: |
         cd src
