@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    //"build": "node build.js"
-    "build": "grunt build"  // Changed to use grunt for building
+    "build": "grunt build" 
   },
   "license": "MIT",
   "dependencies": {
