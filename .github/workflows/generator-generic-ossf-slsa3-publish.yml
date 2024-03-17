@@ -13,19 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      # Setup Node.js environment
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
       
+      # Install dependencies in the src directory
       - name: Install dependencies
         run: npm install
         working-directory: ./src
       
+      # Run the build script defined in package.json within the src directory
       - name: Run Grunt build
         run: npm run build
         working-directory: ./src
       
+      # Generate the SHA-256 digests of the artifacts in the dist directory
       - name: Generate subject for provenance
         id: hash
         run: |
