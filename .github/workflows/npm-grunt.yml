@@ -36,6 +36,7 @@ jobs:
 
     - name: Build
       run: |
-        mpm install
+        cd src
+        npm install
         npm run build
 
