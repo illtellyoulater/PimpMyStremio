@@ -16,23 +16,13 @@ module.exports = function(grunt) {
       }
     },
 
-    // Watch for changes and reload
-    watch: {
-      scripts: {
-        files: ['src/**/*.*'],
-        tasks: ['eslint', 'uglify'],
-        options: {
-          livereload: true,
-        },
-      },
-    },
+    // Any other build tasks relevant to your project
   });
 
   // Load the necessary plugins
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-eslint');
 
-  // Default task
-  grunt.registerTask('default', ['eslint', 'uglify', 'watch']);
+  // Define the default task that the GitHub Actions workflow will execute
+  grunt.registerTask('default', ['eslint', 'uglify']);
 };
