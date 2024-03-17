@@ -29,11 +29,14 @@ jobs:
     # Ensure all dependencies are updated to address vulnerabilities and compatibility
     - name: Install and update dependencies
       run: |
+        cd src
         npm install -g npm-check-updates
         ncu -u
         npm install
     - name: Install Grunt CLI
-      run: npm install grunt-cli --save-dev
+      run: |
+        cd src
+        npm install grunt-cli --save-dev
     - name: Build
       run: |
         cd src
