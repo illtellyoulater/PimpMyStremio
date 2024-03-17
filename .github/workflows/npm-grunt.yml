@@ -46,3 +46,4 @@ jobs:
     - name: Run build with Grunt
       run: npm run build
       working-directory: ./src
+      
