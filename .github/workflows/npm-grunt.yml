@@ -37,4 +37,5 @@ jobs:
       run: |
         cd src
         npm install
+        npm install --save-dev grunt-eslint grunt-contrib-uglify grunt-contrib-watch
         grunt
