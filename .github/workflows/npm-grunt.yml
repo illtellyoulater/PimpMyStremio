@@ -38,3 +38,4 @@ jobs:
       run: |
         cd src
         npm run build
+
