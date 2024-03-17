@@ -1,15 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# This workflow lets you generate SLSA provenance file for your project.
-# The generation satisfies level 3 for the provenance requirements - see https://slsa.dev/spec/v0.1/requirements
-# The project is an initiative of the OpenSSF (openssf.org) and is developed at
-# https://github.com/slsa-framework/slsa-github-generator.
-# The provenance file can be verified using https://github.com/slsa-framework/slsa-verifier.
-# For more information about SLSA and how it improves the supply-chain, visit slsa.dev.
-
 name: SLSA generic generator
 on:
   workflow_dispatch:
@@ -51,8 +39,14 @@ jobs:
 
           # List the artifacts the provenance will refer to.
           files=$(ls artifact*)
-          # Generate the subjects (base64 encoded).
-          echo "hashes=$(sha256sum $files | base64 -w0)" >> "${GITHUB_OUTPUT}"
+          # Generate the subjects (digests of the artifacts).
+          digests=""
+          for file in $files; do
+            digest=$(sha256sum "$file" | awk '{print $1}')
+            digests+="$file:$digest,"
+          done
+          # Output the digests in the expected format.
+          echo "digests=${digests::-1}" >> $GITHUB_ENV
 
   provenance:
     needs: [build]
