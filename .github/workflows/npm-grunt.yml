@@ -37,4 +37,5 @@ jobs:
     - name: Build
       run: |
         cd src
+        npm install grunt-contrib-concat grunt-contrib-cssmin --save-dev
         npm run build
