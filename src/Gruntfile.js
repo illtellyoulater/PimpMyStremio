@@ -1,8 +1,11 @@
 module.exports = function(grunt) {
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    // Any other build tasks relevant to your project
-  });
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        // Placeholder configuration
+    });
 
-  grunt.registerTask('build');
+    // Define a simple task to avoid the "Task 'undefined' not found" error
+    grunt.registerTask('build', 'Log some stuff', function() {
+        grunt.log.write('Running the build task...').ok();
+    });
 };
