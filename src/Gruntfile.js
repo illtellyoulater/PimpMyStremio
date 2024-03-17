@@ -24,5 +24,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-eslint');
 
   // Define the default task that the GitHub Actions workflow will execute
+  grunt.registerTask('build', ['eslint', 'uglify']);
   grunt.registerTask('default', ['eslint', 'uglify']);
 };
