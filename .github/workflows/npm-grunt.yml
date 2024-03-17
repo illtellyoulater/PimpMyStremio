@@ -21,21 +21,28 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        # Add this to configure caching of node modules
+        cache: 'npm'
 
     - name: Install system dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y libappindicator3-dev libindicator3-dev
 
+    - name: Change directory to src
+      run: cd src
+
     - name: Install and update dependencies
       run: |
-        cd src
         npm install -g npm-check-updates
         ncu -u
         npm install
+      working-directory: ./src
 
-    - name: Build
-      run: |
-        cd src
-        npm install grunt-contrib-concat grunt-contrib-cssmin --save-dev
-        npm run build
+    - name: Install Grunt plugins
+      run: npm install grunt-contrib-concat grunt-contrib-cssmin --save-dev
+      working-directory: ./src
+
+    - name: Run build with Grunt
+      run: npm run build
+      working-directory: ./src
