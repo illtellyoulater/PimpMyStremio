@@ -70,6 +70,10 @@
   },
   "devDependencies": {
     "ncp": "^2.0.0",
+    "pkg": "^4.3.7",
+    "grunt": "^1.4.1",  // Specify the latest version suitable for your project
+    "grunt-cli": "^1.4.3",  // This enables you to run Grunt commands
+    "ncp": "^2.0.0",
     "pkg": "^4.3.7"
   },
   "bin": "packed.js",
