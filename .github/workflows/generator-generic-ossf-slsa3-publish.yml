@@ -17,40 +17,28 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-
+      
       - name: Install dependencies
         run: npm install
-
+        working-directory: ./src
+      
       - name: Run Grunt build
         run: npm run build
-
-      # ========================================================
-      #
-      # Step 1: Build your artifacts.
-      #
-      # ========================================================
-      # This is replaced by actual Grunt build process above
-
-      # ========================================================
-      #
-      # Step 2: Add a step to generate the provenance subjects
-      #         as shown below. Update the sha256 sum arguments
-      #         to include all binaries that you generate
-      #         provenance for.
-      #
-      # ========================================================
+        working-directory: ./src
+      
       - name: Generate subject for provenance
         id: hash
         run: |
           set -euo pipefail
-          # Specify the actual artifact files from the dist directory
-          files=$(ls dist/*)
+          cd dist
+          files=$(ls)
           digests=""
           for file in $files; do
             digest=$(sha256sum "$file" | awk '{print $1}')
             digests+="$file:$digest,"
           done
           echo "digests=${digests::-1}" >> $GITHUB_ENV
+        working-directory: ./src
 
   provenance:
     needs: [build]
