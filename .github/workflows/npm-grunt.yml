@@ -37,5 +37,4 @@ jobs:
     - name: Build
       run: |
         cd src
-        npm install    
-        grunt
+        npm run build
