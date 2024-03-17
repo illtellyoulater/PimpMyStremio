@@ -29,5 +29,6 @@ jobs:
 
     - name: Build
       run: |
+        cd src
         npm install
         grunt
