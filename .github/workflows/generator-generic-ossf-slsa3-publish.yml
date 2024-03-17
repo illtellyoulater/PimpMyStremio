@@ -12,17 +12,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Grunt build
+        run: npm run build
 
       # ========================================================
       #
       # Step 1: Build your artifacts.
       #
       # ========================================================
-      - name: Build artifacts
-        run: |
-            # These are some amazing artifacts.
-            echo "artifact1" > artifact1
-            echo "artifact2" > artifact2
+      # This is replaced by actual Grunt build process above
 
       # ========================================================
       #
@@ -36,16 +43,13 @@ jobs:
         id: hash
         run: |
           set -euo pipefail
-
-          # List the artifacts the provenance will refer to.
-          files=$(ls artifact*)
-          # Generate the subjects (digests of the artifacts).
+          # Specify the actual artifact files from the dist directory
+          files=$(ls dist/*)
           digests=""
           for file in $files; do
             digest=$(sha256sum "$file" | awk '{print $1}')
             digests+="$file:$digest,"
           done
-          # Output the digests in the expected format.
           echo "digests=${digests::-1}" >> $GITHUB_ENV
 
   provenance:
