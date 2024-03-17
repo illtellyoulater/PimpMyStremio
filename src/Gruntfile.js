@@ -1,11 +1,39 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        // Placeholder configuration
+
+        // Example configuration for compiling JavaScript
+        concat: {
+            options: {
+                separator: ';',
+            },
+            dist: {
+                src: ['src/web/**/*.js'],
+                dest: 'dist/bundle.js',
+            },
+        },
+
+        // Example configuration for minifying CSS
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'dist',
+                    ext: '.min.css'
+                }]
+            }
+        }
     });
 
-    // Define a simple task to avoid the "Task 'undefined' not found" error
-    grunt.registerTask('build', 'Log some stuff', function() {
-        grunt.log.write('Running the build task...').ok();
-    });
+    // Load the plugins that provide the "concat" and "cssmin" tasks.
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+
+    // Default task(s).
+    grunt.registerTask('default', ['concat', 'cssmin']);
+
+    // Custom build task.
+    grunt.registerTask('build', ['concat', 'cssmin']);
 };
