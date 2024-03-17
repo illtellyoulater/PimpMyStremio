@@ -26,16 +26,15 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libappindicator3-dev libindicator3-dev
-    # Ensure all dependencies are updated to address vulnerabilities and compatibility
+
     - name: Install and update dependencies
       run: |
         cd src
         npm install -g npm-check-updates
         ncu -u
         npm install
+
     - name: Build
       run: |
         cd src
-        npm install
-        npm install --save-dev grunt-eslint grunt-contrib-uglify grunt-contrib-watch
-        grunt
+        npm run build
